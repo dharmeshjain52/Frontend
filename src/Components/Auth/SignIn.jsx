@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-
+import axios from 'axios'
 
 
 export default function SignIn(){
+    const [email,setEmail] = useState("");
+    const [username,setUsername] = useState("")
+    const [password,setPassword] = useState("")
+
+    const disableInput = (id1,id2)=>{
+        let inp1 = document.getElementById(id1);
+        inp1.addEventListener("input", function () {
+        document.getElementById(id2).disabled = this.value != "";
+});
+    }
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+
+        
+
+    }
     return (
         <>
 <div class="w-full flex flex-wrap">
@@ -19,18 +35,18 @@ export default function SignIn(){
         <form class="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
             <div class="flex flex-col pt-4">
                 <label for="email" class="text-lg">Email</label>
-                <input type="email" id="email" placeholder="your@email.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"/>
+                <input type="email" id="email" placeholder="your@email.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>{disableInput("email","username");setEmail(e.target.value)}}/>
             </div>
             
             <div class="flex flex-col pt-4">
                 <h2>(or)</h2>
                 <label for="username" class="text-lg">Username</label>
-                <input type="text" id="username" placeholder="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"/>
+                <input type="text" id="username" placeholder="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>{disableInput("username","email");setUsername(e.target.value)}}/>
             </div>
 
             <div class="flex flex-col pt-4">
                 <label for="password" class="text-lg">Password</label>
-                <input type="password" id="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"/>
+                <input type="password" id="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>setPassword(e.target.value)}/>
             </div>
 
             <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"/>
