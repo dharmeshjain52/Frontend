@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-
+import {useSelector} from 'react-redux'
 
 export default function Home() {
+    const LoggedIn = useSelector(state => state.LoggedIn)
+    
+    
     return (   
        <>
 <div className="flex flex-col w-full">       
@@ -18,14 +21,14 @@ export default function Home() {
     </form>
   </div>
   <div className="my-8 h-fit mr-20 p-2 border-2 rounded-full border-gray-300">  
-        <NavLink to="SignIn" className={({isActive})=>`flex flex-row items-center h-12 hover:text-gray-800 ${isActive?"text-gray-800":"text-gray-500"}`}>
+        <NavLink  to="SignIn" className={({isActive})=>`flex flex-row items-center h-12 hover:text-gray-800 ${isActive?"text-gray-800":"text-gray-500"}`}>
                   <span class="inline-flex items-center justify-center h-12 w-12 text-lg"><i class="fa-sharp fa-solid fa-user fa-xl"></i></span>
-                  <span class="text-xl font-black">Sign in/Sign up</span>
+                  <span id="Sign" class="text-xl font-black">SignIn/SignUp</span>
         </NavLink>
   </div>  
 </div>
 <div className="flex flex-col ml-16">  
-        <NavLink  to="/dashboard" role="button" className="flex items-start my-12 w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+        <NavLink  to="/dashboard" role="button" className="flex items-start my-12 w-fit p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
                     <div class="grid mr-4 place-items-center">
                         <img alt="emma" src="https://docs.material-tailwind.com/img/face-3.jpg" class="relative inline-block h-40 w-40 !rounded-full  object-cover object-center" />
                     </div>

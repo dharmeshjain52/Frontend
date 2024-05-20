@@ -11,6 +11,8 @@ import History from './Components/History/History.jsx'
 import SignIn from './Components/Auth/SignIn.jsx'
 import SignUp from './Components/Auth/SignUp.jsx'
 import Playlists from './Components/Playlists/Playlists.jsx'
+import { Provider } from 'react-redux'
+import {store} from './app/store.js'
 
 const route = createBrowserRouter(
   createRoutesFromElements([
@@ -28,6 +30,8 @@ const route = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+  <Provider store={store}>
     <RouterProvider router={route}/>
+  </Provider>  
   </React.StrictMode>,
 )
