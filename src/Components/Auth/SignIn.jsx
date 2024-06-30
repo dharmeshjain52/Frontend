@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import swal from "sweetalert";
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { updateLogIn } from "../../features/AuthSlice";
 
 export default function SignIn(){
@@ -16,6 +16,7 @@ export default function SignIn(){
         let inp1 = document.getElementById(id1);
         inp1.addEventListener("input", function () {
         document.getElementById(id2).disabled = this.value != "";
+        document.getElementById(id1).setAttribute('required',true)
 });
     }
     const handleSubmit = (e)=>{
@@ -39,12 +40,14 @@ export default function SignIn(){
         axios.post("/api/v1/users/login",formData)
         .then((response)=>{
             if(response.data.success){
+                swal?.close()
                 dispatch(updateLogIn())
                 navigate("/")
             }
         })
         .catch((error)=>{
             swal("Error","Invalid Credentials\nPlease try again","error")
+            setPassword('')
         })
 
     }
@@ -63,18 +66,18 @@ export default function SignIn(){
         <form class="flex flex-col pt-3 md:pt-8" onSubmit={handleSubmit}>
             <div class="flex flex-col pt-4">
                 <label htmlFor="email" class="text-lg">Email</label>
-                <input type="email" id="email" placeholder="your@email.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>{disableInput("email","username");setEmail(e.target.value)}}/>
+                <input type="email" id="email" value={email} placeholder="your@email.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>{disableInput("email","username");setEmail(e.target.value)}}/>
             </div>
             
             <div class="flex flex-col pt-4">
                 <h2>(or)</h2>
                 <label htmlFor="username" class="text-lg">Username</label>
-                <input type="text" id="username" placeholder="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>{disableInput("username","email");setUsername(e.target.value)}}/>
+                <input type="text" id="username" value={username} placeholder="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>{disableInput("username","email");setUsername(e.target.value)}}/>
             </div>
 
             <div class="flex flex-col pt-4">
                 <label htmlFor="password" class="text-lg">Password</label>
-                <input type="password" id="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>setPassword(e.target.value)}/>
+                <input type="password" id="password" value={password} placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>setPassword(e.target.value)} required/>
             </div>
 
             <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"/>
@@ -87,7 +90,7 @@ export default function SignIn(){
   </div>
 
   <div class="w-1/2 shadow-2xl">
-    <img class="object-cover w-full h-screen hidden md:block" src="https://source.unsplash.com/IXUM4cJynP0"/>
+    <img class="object-cover w-full h-screen hidden md:block" src="./SignUpLogo.jpeg"/>
   </div>
 </div>
         </>

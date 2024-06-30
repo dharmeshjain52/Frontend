@@ -10,11 +10,14 @@ const authReducer = createSlice({
     initialState,
     reducers:{
         updateLogIn : (state,action) => {
-            state.LoggedIn = !state.LoggedIn 
-        }    
+            state.LoggedIn = true 
+        },
+        updateLogOut : (state,action) => {
+            state.LoggedIn = false
+        }
     }
 })
 
-export const {updateLogIn} = authReducer.actions
+export const {updateLogIn,updateLogOut} = authReducer.actions
 
 export default authReducer.reducer

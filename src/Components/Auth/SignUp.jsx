@@ -84,12 +84,12 @@ export default function SignUp(){
 
             <div class="flex flex-col pt-4">
                 <label htmlFor="Avatar" class="text-lg">Avatar</label>
-                <input required type="file" accept="image/png,img/jpeg" onChange={(e)=>{setAvatar(e.target.files[0])}} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                <input required type="file" accept="image/png,image/jpeg" onChange={(e)=>{setAvatar(e.target.files[0])}} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
 
             <div class="flex flex-col pt-4">
                 <label htmlFor="cover-image" class="text-lg inline-flex gap-2">Cover Image <p className="text-gray-400">(optional)</p></label>
-                <input type="file" accept="image/png,img/jpeg" onChange={(e)=>{setCoverImage(e.target.files[0])}} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                <input type="file" accept="image/png,image/jpeg" onChange={(e)=>{setCoverImage(e.target.files[0])}} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
 
             <input type="submit" value="Register" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" />
@@ -102,7 +102,7 @@ export default function SignUp(){
   </div>
 
   <div class="w-1/2 shadow-2xl">
-    <img class="object-cover w-full h-screen hidden md:block" src="https://source.unsplash.com/IXUM4cJynP0" alt="Background" />
+    <img class="object-cover w-full h-screen hidden md:block" src="./SignUpLogo.jpeg" alt="Background" />
   </div>
 </div>
 </>

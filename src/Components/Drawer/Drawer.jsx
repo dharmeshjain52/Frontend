@@ -1,9 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 
 
 export default function Drawer(){
+  const isLoggedIn = useSelector(state => state.LoggedIn)
     return (
         <>
          <div class="min-h-screen flex flex-row">
@@ -37,10 +39,14 @@ export default function Drawer(){
                 </NavLink>
               </li>
             </ul>
-            <NavLink to="SignIn" className={({isActive})=>`flex flex-row items-center h-12  transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800 ${isActive?"text-gray-800":"text-gray-500"}`}>
+          {
+            isLoggedIn?
+            (<div></div>)
+            :<NavLink to="SignIn" className={({isActive})=>`flex flex-row items-center h-12  transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800 ${isActive?"text-gray-800":"text-gray-500"}`}>
                   <span class="inline-flex items-center justify-center h-12 w-12 text-lg"><i class="fa-sharp fa-solid fa-user fa-xl"></i></span>
                   <span class="text-xl font-black">Sign in/Sign up</span>
-                </NavLink>
+            </NavLink>
+          }
           </div>
         </div>
         </>

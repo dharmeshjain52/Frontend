@@ -1,10 +1,24 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import axios from "axios";
+import { updateLogIn } from "../../features/AuthSlice";
+import Dropdown from "../Auth/SignOut.jsx";
 
 export default function Home() {
-    const LoggedIn = useSelector(state => state.LoggedIn)
-    
+    const dispatch = useDispatch()
+    const renderLogIn = !useSelector(state => state.LoggedIn)
+    useEffect(() =>{
+    axios.get('/api/v1/users/user-LoggedIn')
+    .then((response)=>{
+        const LoggedIn = response.data.data
+        if(LoggedIn){
+            dispatch(updateLogIn())
+            document.getElementById("Sign").innerText='Signed Up'
+        }
+    })
+    .catch((error)=>{})    
+    },[])
     
     return (   
        <>
@@ -20,12 +34,15 @@ export default function Home() {
         </button>
     </form>
   </div>
+  { renderLogIn?(
   <div className="my-8 h-fit mr-20 p-2 border-2 rounded-full border-gray-300">  
         <NavLink  to="SignIn" className={({isActive})=>`flex flex-row items-center h-12 hover:text-gray-800 ${isActive?"text-gray-800":"text-gray-500"}`}>
                   <span class="inline-flex items-center justify-center h-12 w-12 text-lg"><i class="fa-sharp fa-solid fa-user fa-xl"></i></span>
                   <span id="Sign" class="text-xl font-black">SignIn/SignUp</span>
         </NavLink>
-  </div>  
+  </div>
+  ):(<Dropdown/>)
+}  
 </div>
 <div className="flex flex-col ml-16">  
         <NavLink  to="/dashboard" role="button" className="flex items-start my-12 w-fit p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
